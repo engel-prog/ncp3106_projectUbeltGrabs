@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Customer Sign Up | Ubelt Grabs</title>
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    /* Page-specific styling */
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      background: var(--logo-light, #f5f6f8);
+      font-family: Arial, sans-serif;
+    }
+
+    .signup-container {
+      background: white;
+      padding: 2rem 2.5rem;
+      border-radius: 1rem;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+      width: 100%;
+      max-width: 450px;
+      text-align: center;
+    }
+
+    .signup-logo {
+      width: 80px;
+      margin-bottom: 1rem;
+    }
+
+    h1 {
+      color: var(--logo-primary, #142a52);
+      margin-bottom: 0.5rem;
+    }
+
+    p.subtitle {
+      color: #555;
+      margin-bottom: 1.5rem;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="password"] {
+      padding: 0.75rem;
+      border: 1px solid #ccc;
+      border-radius: 0.5rem;
+      font-size: 1rem;
+    }
+
+    .button {
+      background: var(--logo-accent, #d92b28);
+      color: white;
+      border: none;
+      border-radius: 0.5rem;
+      padding: 0.75rem;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .button:hover {
+      background: var(--logo-primary, #142a52);
+    }
+
+    .back-link {
+      display: inline-block;
+      margin-top: 1rem;
+      color: var(--logo-primary, #142a52);
+      text-decoration: none;
+      font-size: 0.9rem;
+    }
+
+    .back-link:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="signup-container">
+    <img src="uploads/logoreal.png" alt="Ubelt Grabs Logo" class="signup-logo" />
+    <h1>Customer Sign Up</h1>
+    <p class="subtitle">Create an account and start ordering now!</p>
+
+    <form id="customerSignupForm">
+      <input type="text" id="customerName" placeholder="Full Name" required />
+      <input type="email" id="customerEmail" placeholder="Email" required />
+      <input type="password" id="customerPassword" placeholder="Password" required />
+      <input type="password" id="confirmPassword" placeholder="Confirm Password" required />
+      <button type="submit" class="button">Sign Up</button>
+    </form>
+
+    <a href="index.html" class="back-link">← Back to Home</a><br />
+    <a href="loginc.html" class="back-link">Already have an account? Log in</a>
+  </div>
+
+  <script>
+    document.getElementById("customerSignupForm").addEventListener("submit", function (event) {
+      event.preventDefault();
+
+      const name = document.getElementById("customerName").value.trim();
+      const email = document.getElementById("customerEmail").value.trim();
+      const password = document.getElementById("customerPassword").value;
+      const confirm = document.getElementById("confirmPassword").value;
+
+      if (!name || !email || !password || !confirm) {
+        alert("Please fill out all fields.");
+        return;
+      }
+
+      if (password !== confirm) {
+        alert("Passwords do not match!");
+        return;
+      }
+
+      // Simulate successful registration
+      alert("Sign up successful! Welcome, " + name + "!");
+      window.location.href = "menu.html"; // Redirect to menu after signup
+    });
+  </script>
+</body>
+</html>

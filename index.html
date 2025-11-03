@@ -52,22 +52,37 @@
     </div>
   </div>
 
-  <!-- LOGIN / SIGNUP MODAL -->
-<div id="loginModal" class="modal">
-  <div class="modal__overlay" id="closeLogin"></div>
+  <!-- LOGIN MODAL -->
+  <div id="loginModal" class="modal">
+    <div class="modal__overlay" id="closeLogin"></div>
 
-  <div class="modal__content">
-    <button class="modal__close" id="closeLoginBtn">&times;</button>
-    <h2 class="modal__title">Choose Account Type</h2>
-    <p class="modal__subtitle">Select how you want to continue:</p>
+    <div class="modal__content">
+      <button class="modal__close" id="closeLoginBtn">&times;</button>
+      <h2 class="modal__title">Log In</h2>
+      <p class="modal__subtitle">Choose your account type:</p>
 
-    <div class="modal__options">
-      <a href="seller.html" class="button modal__btn">Seller</a>
-      <a href="menu.html" class="button modal__btn button--alt">Customer</a>
+      <div class="modal__options">
+        <a href="logins.html" class="button modal__btn">Seller</a>
+        <a href="loginc.html" class="button modal__btn button--alt">Customer</a>
+      </div>
     </div>
   </div>
-</div>
 
+  <!-- SIGNUP MODAL -->
+  <div id="signupModal" class="modal">
+    <div class="modal__overlay" id="closeSignup"></div>
+
+    <div class="modal__content">
+      <button class="modal__close" id="closeSignupBtn">&times;</button>
+      <h2 class="modal__title">Sign Up</h2>
+      <p class="modal__subtitle">Choose your account type:</p>
+
+      <div class="modal__options">
+        <a href="signups.html" class="button modal__btn">Seller</a>
+        <a href="signupc.html" class="button modal__btn button--alt">Customer</a>
+      </div>
+    </div>
+  </div>
 
   <!-- EXIT CONFIRM MODAL -->
   <div id="exitModal" class="modal">
@@ -89,31 +104,39 @@
     // Footer year
     document.getElementById("year").textContent = new Date().getFullYear();
 
-    // Modal Elements
+    // Modal references
     const aboutModal = document.getElementById("aboutModal");
     const aboutLink = document.getElementById("aboutLink");
     const closeAbout = document.getElementById("closeAbout");
 
     const loginModal = document.getElementById("loginModal");
     const loginBtn = document.getElementById("loginBtn");
-    const signupBtn = document.getElementById("signupBtn");
+    const closeLoginBtn = document.getElementById("closeLoginBtn");
     const closeLogin = document.getElementById("closeLogin");
-    const closeLoginBtn = document.getElementById("closeLoginBtn"); // new close button inside modal
+
+    const signupModal = document.getElementById("signupModal");
+    const signupBtn = document.getElementById("signupBtn");
+    const closeSignupBtn = document.getElementById("closeSignupBtn");
+    const closeSignup = document.getElementById("closeSignup");
 
     const exitModal = document.getElementById("exitModal");
     const exitLink = document.getElementById("exitLink");
     const confirmExit = document.getElementById("confirmExit");
     const cancelExit = document.getElementById("cancelExit");
 
-    // About modal behavior
+    // ABOUT modal
     aboutLink.onclick = () => (aboutModal.style.display = "block");
     closeAbout.onclick = () => (aboutModal.style.display = "none");
 
-    // Login/Signup modal behavior (same modal for both)
-    loginBtn.onclick = signupBtn.onclick = () => (loginModal.style.display = "flex"); // use flex for centering
+    // LOGIN modal
+    loginBtn.onclick = () => (loginModal.style.display = "flex");
     closeLogin.onclick = closeLoginBtn.onclick = () => (loginModal.style.display = "none");
 
-    // Exit modal — only triggered by Exit link
+    // SIGNUP modal
+    signupBtn.onclick = () => (signupModal.style.display = "flex");
+    closeSignup.onclick = closeSignupBtn.onclick = () => (signupModal.style.display = "none");
+
+    // EXIT modal
     exitLink.onclick = (event) => {
       event.preventDefault();
       exitModal.style.display = "block";
@@ -121,17 +144,15 @@
     cancelExit.onclick = () => (exitModal.style.display = "none");
     confirmExit.onclick = () => {
       exitModal.style.display = "none";
-      // Close tab (will only work if user opened it themselves)
-      window.close();
+      window.close(); // may not always work on all browsers
     };
 
-    // Close modals when clicking outside them
+    // Click outside to close
     window.onclick = function (event) {
-      [aboutModal, loginModal, exitModal].forEach((modal) => {
+      [aboutModal, loginModal, signupModal, exitModal].forEach((modal) => {
         if (event.target === modal) modal.style.display = "none";
       });
     };
   </script>
-  
 </body>
 </html>
