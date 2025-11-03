@@ -1,0 +1,424 @@
+:root {
+  /* logo-driven palette */
+  --logo-primary: #142a52; /* deep navy from logo background */
+  --logo-accent: #d92b28;  /* bright red graffiti */
+  --logo-light: #f5f6f8;   /* off-white */
+  --logo-muted: #bfc8d6;   /* concrete/gray */
+
+  /* keep compatible names used throughout the stylesheet */
+  --ubelt-color: var(--logo-accent);
+  --bg-color: #071226;
+  --bg: var(--logo-primary);
+  --card: rgba(255,255,255,0.03);
+  --accent: var(--logo-accent);
+  --muted: rgba(245,246,248,0.75);
+  --dark: var(--logo-light);
+
+  /* background decoration using logo tones */
+  --blob-1: rgba(217,42,40,0.06); /* red tint */
+  --blob-2: rgba(20,42,82,0.06);  /* navy tint */
+  --blob-3: rgba(34,197,94,0.04);
+}
+
+
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: geist-sans, sans-serif;
+}
+
+body{
+  font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial; 
+  /* gentle two-toned background derived from logo primary */
+  background: linear-gradient(180deg, rgba(20,42,82,0.96) 0%, rgba(8,14,28,0.98) 100%);
+  color: var(--dark);
+  line-height:1.4; 
+  position:relative; 
+  min-height:100vh;
+  background-attachment: fixed;
+}
+
+/* soft blurred blobs as fixed decorative layers - make them subtle on dark */
+body::before,
+body::after{
+  content: '';
+  position: fixed;
+  z-index: -2;
+  pointer-events: none;
+  filter: blur(60px);
+  opacity: 0.9;
+}
+
+body::before{
+  width: 520px; height:520px; left: -10%; top: -8%; background: radial-gradient(circle at 30% 30%, var(--blob-1), transparent 40%);
+}
+body::after{
+  width: 640px; height:640px; right: -12%; bottom: -6%; background: radial-gradient(circle at 70% 70%, var(--blob-2), transparent 35%);
+}
+
+/* subtle animated accent blob inside hero */
+.hero{ position:relative; overflow:visible; }
+.hero::after{
+  content: '';
+  position:absolute;
+  right: -6%; top: -18%; width:420px; height:420px; z-index: -1; pointer-events:none;
+  background: radial-gradient(circle at 40% 40%, rgba(255,122,89,0.14), transparent 45%);
+  transform: rotate(12deg);
+  filter: blur(28px);
+  transition: transform 0.6s ease;
+}
+.hero:hover::after{ transform: rotate(6deg) translateY(-6px); }
+
+/* glass effect for cards on dark */
+.card{
+  background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+  border: 1px solid rgba(255,255,255,0.04);
+  backdrop-filter: blur(6px) saturate(120%);
+  color: var(--dark);
+}
+
+/* gentle vignette on container to draw focus */
+.container{ box-shadow: inset 0 40px 80px rgba(17,24,39,0.02); }
+
+/* Navbar */
+.navbar {
+    background: rgba(6,12,20,0.6);
+    backdrop-filter: blur(6px);
+    box-shadow: 0 4px 18px rgba(2,6,23,0.6);
+    position: sticky; 
+    top: 0; 
+    z-index: 40; 
+    padding: 15px 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.2rem;
+}
+
+.navbar__container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    max-width: 1300px;
+    margin: 0 auto;
+    padding: 0 50px; 
+}
+
+#navbar__logo {
+    color: var(--ubelt-color);
+    justify-self: flex-start;
+    cursor: pointer;
+    text-decoration: none;
+    font-size: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+}
+
+.nav__logo-img {
+    width: 42px;
+    height: 42px;
+    object-fit: cover;
+    border-radius: 8px;
+    box-shadow: 0 6px 18px rgba(2,6,23,0.6);
+}
+
+.nav__logo-text {
+    color: var(--logo-light);
+    font-weight: 700;
+    font-size: 1.1rem;
+}
+
+.fa-gem {
+    margin-right: 0.5rem;
+}
+
+.navbar__menu {
+    list-style: none;
+    display: flex;
+    gap: 0.75rem;
+    align-items: center;
+}
+
+.navbar__item {
+    height: 80px;
+}
+
+.navbar__links {
+    color: var(--dark);
+    text-decoration: none;
+    padding: 0.5rem 0.75rem;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+.navbar__links:hover {
+    background: rgba(255,255,255,0.03);
+    transition: all 0.3ss ease;   
+}
+
+.navbar__btn{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    padding: 10px 22px;
+    height: 100%;
+    cursor: pointer;
+    border-radius: 4px;
+    color: white;
+    border: none;
+    outline: none;
+    transition: all 0.2s ease-in-out;
+    margin-left: 24px;
+}
+
+.button {
+    display: inline-block;
+    padding: 0.5rem 0.85rem;
+    background: linear-gradient(90deg, var(--logo-accent), #ff6b5a);
+    color: var(--logo-light);
+    border-radius: 8px;
+    text-decoration: none;
+    border: 1px solid rgba(0,0,0,0.15);
+}
+
+.button:hover {
+    opacity: 0.95;
+    transition: all 0.3s ease;
+}
+
+/* mobile toggle */
+.navbar__toggle{ 
+    display:none; 
+    width:40px; 
+    height:36px; 
+    align-items:center; 
+    justify-content:center; 
+    cursor:pointer; 
+}
+
+.navbar__toggle .bar{ 
+    display:block; 
+    width:20px; 
+    height:2px; 
+    background:var(--dark); 
+    margin:3px 0; 
+    transition:transform .2s ease; 
+}
+
+.navbar__toggle.is-active .bar:nth-child(1){ 
+    transform: translateY(5px) rotate(45deg); 
+}
+
+.navbar__toggle.is-active .bar:nth-child(2){ 
+    opacity:0; 
+}
+
+.navbar__toggle.is-active .bar:nth-child(3){ 
+    transform: translateY(-5px) rotate(-45deg); 
+}
+
+/* Seller Hero Section */
+.seller-hero {
+  background: linear-gradient(180deg, rgba(217, 43, 40, 0.15), rgba(15, 15, 25, 0.95));
+  text-align: center;
+  padding: 8rem 2rem 6rem; /* Adjusted for fixed navbar */
+}
+
+.seller-hero .hero__title {
+  font-size: 2.5rem;
+  color: var(--text);
+  margin-bottom: 0.8rem;
+}
+
+.seller-hero .hero__subtitle {
+  font-size: 1.1rem;
+  color: var(--muted);
+}
+
+/* Upload Section */
+.upload {
+  background: var(--bg-alt);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 2rem;
+  margin: 3rem auto;
+  max-width: 700px;
+}
+
+.upload .section__title {
+  text-align: center;
+  color: var(--accent-light);
+  font-size: 1.6rem;
+  margin-bottom: 1.5rem;
+}
+
+.upload__form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+
+.form__group label {
+  display: block;
+  font-weight: 500;
+  margin-bottom: 0.3rem;
+  color: var(--text);
+}
+
+.form__group input,
+.form__group textarea {
+  width: 100%;
+  padding: 0.8rem;
+  border-radius: var(--radius);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: #1a2235;
+  color: var(--text);
+  font-size: 1rem;
+}
+
+.form__group input[type="file"] {
+  background: transparent;
+  border: none;
+  color: var(--muted);
+}
+
+.form__group input:focus,
+.form__group textarea:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 8px rgba(217, 43, 40, 0.5);
+}
+
+/* Image Preview */
+.image-preview {
+  width: 100%;
+  max-height: 250px;
+  object-fit: cover;
+  border-radius: var(--radius);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  margin-top: 0.6rem;
+}
+
+/* Upload Button */
+.upload__btn {
+  background: var(--accent);
+  border: none;
+  color: #fff;
+  padding: 0.9rem 1.2rem;
+  border-radius: var(--radius);
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.3s;
+  text-transform: uppercase;
+}
+
+.upload__btn:hover {
+  background: var(--accent-light);
+  box-shadow: var(--shadow);
+  transform: scale(1.03);
+}
+
+/* Uploaded Items Grid */
+.features {
+  padding: 2rem 1rem 4rem;
+}
+
+.features .section__title {
+  text-align: center;
+  color: var(--accent-light);
+  font-size: 1.6rem;
+  margin-bottom: 2rem;
+}
+
+.grid {
+  display: grid;
+  gap: 1.5rem;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+}
+
+/* Item Card */
+.card {
+  background: var(--bg-alt);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  overflow: hidden;
+  transition: 0.3s;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 0 20px rgba(217, 43, 40, 0.4);
+}
+
+.card__img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+.card__body {
+  padding: 1rem;
+}
+
+.card__title {
+  color: var(--text);
+  font-size: 1.2rem;
+  margin-bottom: 0.3rem;
+}
+
+.card__desc {
+  color: var(--muted);
+  font-size: 0.95rem;
+  margin-bottom: 1rem;
+}
+
+/* Buttons inside cards */
+.card__btn {
+  background: var(--danger);
+  border: none;
+  color: #fff;
+  padding: 0.6rem 1.2rem;
+  border-radius: var(--radius);
+  font-weight: 500;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.card__btn:hover {
+  background: #ff625a;
+  box-shadow: 0 0 12px rgba(255, 85, 82, 0.5);
+}
+
+/* "No items yet" message */
+.no-items {
+  text-align: center;
+  color: var(--muted);
+  font-size: 1rem;
+  grid-column: 1 / -1;
+}
+
+/* Footer */
+.footer {
+  background: #0a0f1b;
+  color: var(--muted);
+  text-align: center;
+  padding: 1.5rem;
+  font-size: 0.9rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.footer a {
+  color: var(--accent-light);
+  text-decoration: none;
+  margin-left: 10px;
+}
+
+.footer a:hover {
+  text-decoration: underline;
+}

@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ubelt Grabs</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body>
+  <!-- NAVBAR -->
+  <nav class="navbar">
+    <div class="navbar__container">
+      <a href="#" id="navbar__logo">
+        <img src="uploads/logoreal.png" alt="Ubelt Grabs" class="nav__logo-img" />
+        <span class="nav__logo-text">Ubelt Grabs</span>
+      </a>
+      <ul class="navbar__menu">
+        <li class="navbar__item"><a href="#hero" class="navbar__links">Hero</a></li>
+        <li class="navbar__item"><a href="#" id="aboutLink" class="navbar__links">About</a></li>
+        <li class="navbar__item"><a href="https://facebook.com/YourPageHere" target="_blank" class="navbar__links">Connect</a></li>
+        <li class="navbar__item"><a href="#" id="exitLink" class="navbar__links">Exit</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- HERO SECTION -->
+  <header id="hero" class="hero">
+    <div class="hero__container">
+      <img src="uploads/logoreal.png" alt="Ubelt Grabs Logo" class="hero__logo" />
+      <h1 class="hero__title">Ubelt Grabs</h1>
+      <p class="hero__subtitle">
+        Connecting local sellers and hungry customers — fast, easy, and nearby.
+      </p>
+
+      <div class="hero__buttons">
+        <button id="loginBtn" class="button">Log In</button>
+        <button id="signupBtn" class="button button--alt">Sign Up</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ABOUT MODAL -->
+  <div id="aboutModal" class="modal">
+    <div class="modal-content">
+      <span class="close" id="closeAbout">&times;</span>
+      <h2>About Ubelt Grabs</h2>
+      <p>
+        Ubelt Grabs is a web application that connects customers to nearby food sellers.
+        Sellers can easily post their dishes while customers browse and order with ease.
+      </p>
+    </div>
+  </div>
+
+  <!-- LOGIN / SIGNUP MODAL -->
+<div id="loginModal" class="modal">
+  <div class="modal__overlay" id="closeLogin"></div>
+
+  <div class="modal__content">
+    <button class="modal__close" id="closeLoginBtn">&times;</button>
+    <h2 class="modal__title">Choose Account Type</h2>
+    <p class="modal__subtitle">Select how you want to continue:</p>
+
+    <div class="modal__options">
+      <a href="seller.html" class="button modal__btn">Seller</a>
+      <a href="menu.html" class="button modal__btn button--alt">Customer</a>
+    </div>
+  </div>
+</div>
+
+
+  <!-- EXIT CONFIRM MODAL -->
+  <div id="exitModal" class="modal">
+    <div class="modal-content">
+      <h2>Exit Ubelt Grabs?</h2>
+      <p>Are you sure you want to exit the application?</p>
+      <div class="exit-buttons">
+        <button id="confirmExit" class="button">Yes, Exit</button>
+        <button id="cancelExit" class="button button--alt">Cancel</button>
+      </div>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <p>© <span id="year"></span> Ubelt Grabs — Local picks, fast.</p>
+  </footer>
+
+  <script>
+    // Footer year
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    // Modal Elements
+    const aboutModal = document.getElementById("aboutModal");
+    const aboutLink = document.getElementById("aboutLink");
+    const closeAbout = document.getElementById("closeAbout");
+
+    const loginModal = document.getElementById("loginModal");
+    const loginBtn = document.getElementById("loginBtn");
+    const signupBtn = document.getElementById("signupBtn");
+    const closeLogin = document.getElementById("closeLogin");
+    const closeLoginBtn = document.getElementById("closeLoginBtn"); // new close button inside modal
+
+    const exitModal = document.getElementById("exitModal");
+    const exitLink = document.getElementById("exitLink");
+    const confirmExit = document.getElementById("confirmExit");
+    const cancelExit = document.getElementById("cancelExit");
+
+    // About modal behavior
+    aboutLink.onclick = () => (aboutModal.style.display = "block");
+    closeAbout.onclick = () => (aboutModal.style.display = "none");
+
+    // Login/Signup modal behavior (same modal for both)
+    loginBtn.onclick = signupBtn.onclick = () => (loginModal.style.display = "flex"); // use flex for centering
+    closeLogin.onclick = closeLoginBtn.onclick = () => (loginModal.style.display = "none");
+
+    // Exit modal — only triggered by Exit link
+    exitLink.onclick = (event) => {
+      event.preventDefault();
+      exitModal.style.display = "block";
+    };
+    cancelExit.onclick = () => (exitModal.style.display = "none");
+    confirmExit.onclick = () => {
+      exitModal.style.display = "none";
+      // Close tab (will only work if user opened it themselves)
+      window.close();
+    };
+
+    // Close modals when clicking outside them
+    window.onclick = function (event) {
+      [aboutModal, loginModal, exitModal].forEach((modal) => {
+        if (event.target === modal) modal.style.display = "none";
+      });
+    };
+  </script>
+  
+</body>
+</html>
