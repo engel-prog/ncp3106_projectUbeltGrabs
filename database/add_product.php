@@ -1,27 +1,37 @@
 <?php
-include "db.php";
+include 'db.php';
 
-// Only run when form is submitted
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $name = $_POST['pName'];
-    $price = $_POST['pPrice'];
-    $category = $_POST['pCategory'];
-    $university = $_POST['pUniversity'];
-    $fb = $_POST['pFB'] ?? null;
-    $image = $_POST['pImage'] ?? null;
-    $desc = $_POST['pDesc'] ?? null;
+    $name = $_POST['foodName'];
+    $price = $_POST['foodPrice'];
+    $description = $_POST['foodDesc'];
 
-    $sql = "INSERT INTO products (name, price, category, university_id, fb_page, image_url, description) 
-            VALUES (?, ?, ?, ?, ?, ?, ?)";
+    // Handle image upload
+    $image = "";
+    if (isset($_FILES['foodImage']) && $_FILES['foodImage']['error'] == 0) {
+        $targetDir = "uploads/";
+        if (!is_dir($targetDir)) {
+            mkdir($targetDir, 0777, true); // create uploads folder if it doesn't exist
+        }
 
-    $stmt = $conn->prepare($sql);
-    $stmt->bind_param("sdsisss", $name, $price, $category, $university, $fb, $image, $desc);
+        $image = basename($_FILES["foodImage"]["name"]);
+        $targetFile = $targetDir . $image;
 
-    if ($stmt->execute()) {
-        header("Location: index.php?seller=1&success=1"); // redirect back with success
-        exit;
-    } else {
-        echo "Error: " . $stmt->error;
+        if (!move_uploaded_file($_FILES["foodImage"]["tmp_name"], $targetFile)) {
+            echo "Error uploading image.";
+            exit;
+        }
     }
+
+    $sql = "INSERT INTO products (name, description, price, image)
+            VALUES ('$name', '$description', '$price', '$image')";
+
+    if ($conn->query($sql) === TRUE) {
+        echo "<script>alert('Product added successfully!'); window.location.href='seller.php';</script>";
+    } else {
+        echo "Error: " . $conn->error;
+    }
+
+    $conn->close();
 }
 ?>

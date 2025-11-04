@@ -1,3 +1,7 @@
+<?php
+include 'db.php';
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -32,34 +36,34 @@
   </header>
 
   <!-- Upload Section -->
-  <main class="container">
-    <section class="upload">
-      <h2 class="section__title">Add New Food Item</h2>
-      <form id="uploadForm" class="upload__form">
-        <div class="form__group">
-          <label for="foodImage">Food Image:</label>
-          <input type="file" id="foodImage" accept="image/*" required>
-          <img id="imagePreview" class="image-preview" alt="Image preview" style="display:none;">
-        </div>
+  <section class="upload">
+  <h2 class="section__title">Add New Food Item</h2>
+  <form id="uploadForm" class="upload__form" method="POST" action="add_product.php" enctype="multipart/form-data">
+    <div class="form__group">
+      <label for="foodImage">Food Image:</label>
+      <input type="file" id="foodImage" name="foodImage" accept="image/*" required>
+      <img id="imagePreview" class="image-preview" alt="Image preview" style="display:none;">
+    </div>
 
-        <div class="form__group">
-          <label for="foodName">Food Name:</label>
-          <input type="text" id="foodName" placeholder="e.g. Chicken Adobo" required>
-        </div>
+    <div class="form__group">
+      <label for="foodName">Food Name:</label>
+      <input type="text" id="foodName" name="foodName" placeholder="e.g. Chicken Adobo" required>
+    </div>
 
-        <div class="form__group">
-          <label for="foodPrice">Price (₱):</label>
-          <input type="number" id="foodPrice" placeholder="e.g. 120" required>
-        </div>
+    <div class="form__group">
+      <label for="foodPrice">Price (₱):</label>
+      <input type="number" id="foodPrice" name="foodPrice" placeholder="e.g. 120" required>
+    </div>
 
-        <div class="form__group">
-          <label for="foodDesc">Description:</label>
-          <textarea id="foodDesc" rows="3" placeholder="Short description..." required></textarea>
-        </div>
+    <div class="form__group">
+      <label for="foodDesc">Description:</label>
+      <textarea id="foodDesc" name="foodDesc" rows="3" placeholder="Short description..." required></textarea>
+    </div>
 
-        <button type="submit" class="button upload__btn">Upload Item</button>
-      </form>
-    </section>
+    <button type="submit" class="button upload__btn">Upload Item</button>
+  </form>
+</section>
+
 
     <!-- Uploaded Items Preview -->
     <section class="features">
@@ -140,3 +144,4 @@
   </script>
 </body>
 </html>
+?>

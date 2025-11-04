@@ -1,0 +1,24 @@
+sql
+
+CREATE DATABASE IF NOT EXISTS ubelt_grabs CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+USE ubelt_grabs;
+
+CREATE TABLE IF NOT EXISTS products (
+  id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+  name VARCHAR(255) NOT NULL,
+  price DECIMAL(10,2) NOT NULL,
+  category VARCHAR(100) NOT NULL,
+  university_id INT NOT NULL,
+  fb_page VARCHAR(255) NULL,
+  image_url VARCHAR(500) NULL,
+  description TEXT NULL,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+Setting up a database:
+phpMyAdmin
+
+create a new database:
+ubelt_db
+
+inside it, create
