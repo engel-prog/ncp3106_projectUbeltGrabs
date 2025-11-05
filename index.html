@@ -4,155 +4,331 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Ubelt Grabs</title>
-  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="assets/css/styles.css" />
+  <style>
+    :root {
+      --logo-primary: #142a52;
+      --logo-accent: #d92b28;
+      --background: #f5f6f8;
+    }
+
+    /* ===== GLOBAL BODY ===== */
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: var(--background);
+      color: #333;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    /* ===== LOADING SCREEN ===== */
+    #loader {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: var(--background);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      z-index: 10000;
+      transition: opacity 0.6s ease;
+    }
+
+    #loader img {
+      width: 180px; /* Larger logo in loading */
+      animation: pulse 1.5s infinite;
+    }
+
+    #loader p {
+      color: var(--logo-primary);
+      font-size: 1.1rem;
+      font-weight: bold;
+      margin-top: 10px;
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); opacity: 1; }
+      50% { transform: scale(1.1); opacity: 0.7; }
+    }
+
+    #loader.hidden {
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    /* ===== MAIN CONTENT ===== */
+    main {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      opacity: 0;
+      transition: opacity 1s ease;
+      background: var(--background);
+    }
+
+    main.visible {
+      opacity: 1;
+    }
+
+    /* ===== HEADER (TOP BAR) ===== */
+    header {
+      background: var(--logo-primary);
+      color: white;
+      display: flex;
+      align-items: center;
+      padding: 1rem 2rem;
+    }
+
+    .nav__logo-img {
+      width: 60px; /* bigger header logo */
+      height: auto;
+    }
+
+    .nav__logo-text {
+      font-size: 1.7rem;
+      font-weight: bold;
+      margin-left: 0.6rem;
+    }
+
+    /* ===== CENTER CONTENT ===== */
+    .content {
+      text-align: center;
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 2rem 1rem;
+    }
+
+    .logo {
+      width: 180px; /* increased logo size */
+      margin-bottom: 1rem;
+    }
+
+    .tagline {
+      color: #444;
+      font-size: 1.1rem;
+      max-width: 350px;
+      margin-bottom: 2rem;
+    }
+
+    .buttons {
+      display: flex;
+      flex-direction: column;
+      gap: 0.8rem;
+      align-items: center;
+    }
+
+    .button {
+      background: var(--logo-accent);
+      color: white;
+      border: none;
+      padding: 0.8rem 2rem;
+      border-radius: 0.5rem;
+      cursor: pointer;
+      font-size: 1rem;
+      transition: background 0.3s;
+      width: 220px;
+    }
+
+    .button:hover {
+      background: var(--logo-primary);
+    }
+
+    .button--alt {
+      background: var(--logo-primary);
+    }
+
+    .button--alt:hover {
+      background: var(--logo-accent);
+    }
+
+    /* ===== BOTTOM TEXT ===== */
+    .bottom-text {
+      text-align: center;
+      color: #555;
+      font-size: 0.9rem;
+      padding: 1rem 0;
+    }
+
+    /* ===== MODALS ===== */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 9999;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      justify-content: center;
+      align-items: center;
+    }
+
+    .modal-content {
+      background: white;
+      padding: 2rem;
+      border-radius: 1rem;
+      width: 90%;
+      max-width: 400px;
+      text-align: center;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    }
+
+    .modal-content h2 {
+      margin-bottom: 1rem;
+      color: var(--logo-primary);
+    }
+
+    .modal-content button {
+      display: block;
+      width: 100%;
+      margin: 0.5rem 0;
+      padding: 0.8rem;
+      border: none;
+      border-radius: 0.5rem;
+      background: var(--logo-accent);
+      color: white;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .modal-content button:hover {
+      background: var(--logo-primary);
+    }
+
+    .close {
+      background: #ccc;
+      color: #333;
+      font-size: 0.9rem;
+      margin-top: 1rem;
+    }
+
+    .close:hover {
+      background: #999;
+    }
+  </style>
 </head>
 
 <body>
-  <!-- NAVBAR -->
-  <nav class="navbar">
-    <div class="navbar__container">
-      <a href="#" id="navbar__logo">
-        <img src="uploads/uglogo.png" alt="Ubelt Grabs" class="nav__logo-img" />
-        <span class="nav__logo-text">Ubelt Grabs</span>
-      </a>
-      <ul class="navbar__menu">
-        <li class="navbar__item"><a href="#hero" class="navbar__links">Home</a></li>
-        <li class="navbar__item"><a href="#" id="aboutLink" class="navbar__links">About</a></li>
-        <li class="navbar__item"><a href="https://facebook.com/YourPageHere" target="_blank" class="navbar__links">Connect</a></li>
-        <li class="navbar__item"><a href="#" id="exitLink" class="navbar__links">Exit</a></li>
-      </ul>
-    </div>
-  </nav>
+  <!-- ===== LOADING PAGE ===== -->
+  <div id="loader">
+    <img src="uploads/logoreal.png" alt="Ubelt Grabs Logo" />
+    <p>Loading Ubelt Grabs...</p>
+  </div>
 
-  <!-- HERO SECTION -->
-  <header id="hero" class="hero">
-    <div class="hero__container">
-      <img src="uploads/uglogo.png" alt="Ubelt Grabs Logo" class="hero__logo" />
-      <h1 class="hero__title">Ubelt Grabs</h1>
-      <p class="hero__subtitle">
+  <!-- ===== MAIN CONTENT ===== -->
+  <main>
+    <!-- HEADER -->
+    <header>
+      <img src="uploads/logoreal.png" alt="Ubelt Grabs" class="nav__logo-img" />
+      <span class="nav__logo-text">Ubelt Grabs</span>
+    </header>
+
+    <!-- CENTERED CONTENT -->
+    <div class="content">
+      <img src="uploads/logoreal.png" alt="Ubelt Grabs Logo" class="logo" />
+      <p class="tagline">
         Connecting local sellers and hungry customers — fast, easy, and nearby.
       </p>
 
-      <div class="hero__buttons">
+      <div class="buttons">
         <button id="loginBtn" class="button">Log In</button>
         <button id="signupBtn" class="button button--alt">Sign Up</button>
       </div>
     </div>
-  </header>
 
-  <!-- ABOUT MODAL -->
-  <div id="aboutModal" class="modal">
-    <div class="modal-content">
-      <span class="close" id="closeAbout">&times;</span>
-      <h2>About Ubelt Grabs</h2>
-      <p>
-        Ubelt Grabs is a web application that connects customers to nearby food sellers.
-        Sellers can easily post their dishes while customers browse and order with ease.
-      </p>
+    <!-- BOTTOM TEXT -->
+    <div class="bottom-text">
+      © <span id="year"></span> Ubelt Grabs — Local picks, fast.
     </div>
-  </div>
+  </main>
 
-  <!-- LOGIN MODAL -->
+  <!-- ===== LOGIN MODAL ===== -->
   <div id="loginModal" class="modal">
-    <div class="modal__overlay" id="closeLogin"></div>
-
-    <div class="modal__content">
-      <button class="modal__close" id="closeLoginBtn">&times;</button>
-      <h2 class="modal__title">Log In</h2>
-      <p class="modal__subtitle">Choose your account type:</p>
-
-      <div class="modal__options">
-        <a href="logins.html" class="button modal__btn">Seller</a>
-        <a href="loginc.html" class="button modal__btn button--alt">Customer</a>
-      </div>
-    </div>
-  </div>
-
-  <!-- SIGNUP MODAL -->
-  <div id="signupModal" class="modal">
-    <div class="modal__overlay" id="closeSignup"></div>
-
-    <div class="modal__content">
-      <button class="modal__close" id="closeSignupBtn">&times;</button>
-      <h2 class="modal__title">Sign Up</h2>
-      <p class="modal__subtitle">Choose your account type:</p>
-
-      <div class="modal__options">
-        <a href="signups.html" class="button modal__btn">Seller</a>
-        <a href="signupc.html" class="button modal__btn button--alt">Customer</a>
-      </div>
-    </div>
-  </div>
-
-  <!-- EXIT CONFIRM MODAL -->
-  <div id="exitModal" class="modal">
     <div class="modal-content">
-      <h2>Exit Ubelt Grabs?</h2>
-      <p>Are you sure you want to exit the application?</p>
-      <div class="exit-buttons">
-        <button id="confirmExit" class="button">Yes, Exit</button>
-        <button id="cancelExit" class="button button--alt">Cancel</button>
-      </div>
+      <h2>Log In As:</h2>
+      <button id="loginCustomer">Customer</button>
+      <button id="loginSeller">Seller</button>
+      <button class="close" id="closeLogin">Close</button>
     </div>
   </div>
 
-  <footer class="footer">
-    <p>© <span id="year"></span> Ubelt Grabs — Local picks, fast.</p>
-  </footer>
+  <!-- ===== SIGNUP MODAL ===== -->
+  <div id="signupModal" class="modal">
+    <div class="modal-content">
+      <h2>Sign Up As:</h2>
+      <button id="signupCustomer">Customer</button>
+      <button id="signupSeller">Seller</button>
+      <button class="close" id="closeSignup">Close</button>
+    </div>
+  </div>
 
   <script>
-    // Footer year
+    // ===== LOADER =====
+    window.addEventListener("load", () => {
+      const loader = document.getElementById("loader");
+      const main = document.querySelector("main");
+
+      setTimeout(() => {
+        loader.classList.add("hidden");
+        main.classList.add("visible");
+      }, 2000);
+    });
+
+    // ===== YEAR =====
     document.getElementById("year").textContent = new Date().getFullYear();
 
-    // Modal references
-    const aboutModal = document.getElementById("aboutModal");
-    const aboutLink = document.getElementById("aboutLink");
-    const closeAbout = document.getElementById("closeAbout");
-
+    // ===== MODALS =====
     const loginModal = document.getElementById("loginModal");
-    const loginBtn = document.getElementById("loginBtn");
-    const closeLoginBtn = document.getElementById("closeLoginBtn");
-    const closeLogin = document.getElementById("closeLogin");
-
     const signupModal = document.getElementById("signupModal");
-    const signupBtn = document.getElementById("signupBtn");
-    const closeSignupBtn = document.getElementById("closeSignupBtn");
-    const closeSignup = document.getElementById("closeSignup");
 
-    const exitModal = document.getElementById("exitModal");
-    const exitLink = document.getElementById("exitLink");
-    const confirmExit = document.getElementById("confirmExit");
-    const cancelExit = document.getElementById("cancelExit");
+    document.getElementById("loginBtn").addEventListener("click", () => {
+      loginModal.style.display = "flex";
+    });
 
-    // ABOUT modal
-    aboutLink.onclick = () => (aboutModal.style.display = "block");
-    closeAbout.onclick = () => (aboutModal.style.display = "none");
+    document.getElementById("signupBtn").addEventListener("click", () => {
+      signupModal.style.display = "flex";
+    });
 
-    // LOGIN modal
-    loginBtn.onclick = () => (loginModal.style.display = "flex");
-    closeLogin.onclick = closeLoginBtn.onclick = () => (loginModal.style.display = "none");
+    document.getElementById("closeLogin").addEventListener("click", () => {
+      loginModal.style.display = "none";
+    });
 
-    // SIGNUP modal
-    signupBtn.onclick = () => (signupModal.style.display = "flex");
-    closeSignup.onclick = closeSignupBtn.onclick = () => (signupModal.style.display = "none");
+    document.getElementById("closeSignup").addEventListener("click", () => {
+      signupModal.style.display = "none";
+    });
 
-    // EXIT modal
-    exitLink.onclick = (event) => {
-      event.preventDefault();
-      exitModal.style.display = "block";
-    };
-    cancelExit.onclick = () => (exitModal.style.display = "none");
-    confirmExit.onclick = () => {
-      exitModal.style.display = "none";
-      window.close(); // may not always work on all browsers
-    };
+    // ===== REDIRECTS =====
+    document.getElementById("loginCustomer").addEventListener("click", () => {
+      window.location.href = "loginc.html";
+    });
 
-    // Click outside to close
-    window.onclick = function (event) {
-      [aboutModal, loginModal, signupModal, exitModal].forEach((modal) => {
-        if (event.target === modal) modal.style.display = "none";
-      });
-    };
+    document.getElementById("loginSeller").addEventListener("click", () => {
+      window.location.href = "logins.html";
+    });
+
+    document.getElementById("signupCustomer").addEventListener("click", () => {
+      window.location.href = "signupc.html";
+    });
+
+    document.getElementById("signupSeller").addEventListener("click", () => {
+      window.location.href = "signups.html";
+    });
+
+    // ===== CLOSE MODAL WHEN CLICK OUTSIDE =====
+    window.addEventListener("click", (event) => {
+      if (event.target === loginModal) loginModal.style.display = "none";
+      if (event.target === signupModal) signupModal.style.display = "none";
+    });
   </script>
 </body>
 </html>
