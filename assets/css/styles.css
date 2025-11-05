@@ -117,12 +117,13 @@ body::after{
     gap: 0.6rem;
 }
 
-.nav__logo-img {
-    width: 42px;
-    height: 42px;
-    object-fit: cover;
-    border-radius: 8px;
-    box-shadow: 0 6px 18px rgba(2,6,23,0.6);
+.hero__logo {
+  width: 250px;
+  height: auto;
+  background: transparent; /* removes white/colored background */
+  box-shadow: none;         /* removes glow or fake background */
+  border-radius: 0;         /* optional – removes rounded edges */
+  object-fit: contain;      /* keeps proportions */
 }
 
 .nav__logo-text {
