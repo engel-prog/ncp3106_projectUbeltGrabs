@@ -3,7 +3,7 @@
 $host = "127.0.0.1:3307";     // XAMPP default
 $user = "root";               // default MySQL user
 $pass = "";                   // default password is empty in XAMPP
-$dbname = "ubelt_grabs";      // database name
+$dbname = "ubelt";      // database name
 
 // Create connection
 $conn = new mysqli($host, $user, $pass, $dbname);
