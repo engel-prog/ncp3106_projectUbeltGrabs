@@ -4,22 +4,17 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>U-Belt Grabs | Menu</title>
-  <link rel="stylesheet" href="assets/css/menu.css" />
   <style>
     :root {
       --logo-primary: #142a52;
       --logo-accent: #d92b28;
       --logo-light: #f5f6f8;
     }
-
     body {
       margin: 0;
       font-family: Arial, sans-serif;
       background: var(--logo-light);
-      color: #333;
     }
-
-    /* ===== NAVBAR ===== */
     .navbar {
       background: var(--logo-primary);
       color: white;
@@ -28,163 +23,55 @@
       align-items: center;
       padding: 1rem 2rem;
     }
-
-    .navbar__logo {
-      font-size: 1.5rem;
-      font-weight: bold;
-      margin: 0;
-    }
-
     .navbar__menu {
-      list-style: none;
       display: flex;
-      align-items: center;
-      gap: 1.2rem;
-      margin: 0;
-      padding: 0;
+      list-style: none;
+      gap: 1rem;
     }
-
     .navbar__links {
       color: white;
       text-decoration: none;
-      font-weight: 500;
-      transition: color 0.3s;
     }
-
     .navbar__links:hover {
       color: var(--logo-accent);
     }
-
-    /* ===== PROFILE DROPDOWN ===== */
-    .profile-dropdown {
-      position: relative;
-    }
-
-    .profile-btn {
+    .navbar__btn a {
       background: var(--logo-accent);
       color: white;
-      border: none;
       padding: 0.5rem 1.2rem;
       border-radius: 0.5rem;
-      cursor: pointer;
-      font-weight: 600;
-      transition: background 0.3s;
+      text-decoration: none;
+      font-weight: bold;
     }
-
-    .profile-btn:hover {
+    .navbar__btn a:hover {
       background: #b71c1b;
     }
-
-    .dropdown-content {
-      display: none;
-      position: absolute;
-      right: 0;
-      top: 110%;
-      background: white;
-      color: #333;
-      min-width: 160px;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-      border-radius: 0.5rem;
-      z-index: 100;
-    }
-
-    .dropdown-content a {
-      color: var(--logo-primary);
-      padding: 0.8rem 1rem;
-      display: block;
-      text-decoration: none;
-      font-weight: 500;
-    }
-
-    .dropdown-content a:hover {
-      background: var(--logo-light);
-    }
-
-    .dropdown-content.show {
-      display: block;
-      animation: fadeIn 0.25s ease;
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(-5px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    /* ===== HERO SECTION ===== */
     .menu-hero {
-      text-align: center;
       background: var(--logo-primary);
       color: white;
-      padding: 3rem 1rem;
-    }
-
-    .hero__title {
-      font-size: 2rem;
-      margin-bottom: 0.5rem;
-    }
-
-    .hero__subtitle {
-      font-size: 1.1rem;
-      color: var(--logo-light);
-    }
-
-    /* ===== MENU SECTION ===== */
-    .menu-section {
-      padding: 2rem;
       text-align: center;
+      padding: 2rem;
     }
-
-    .section__title {
-      color: var(--logo-primary);
-      margin-bottom: 1.5rem;
-      font-size: 1.5rem;
-    }
-
     .grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
       gap: 1.5rem;
+      padding: 2rem;
     }
-
     .card {
       background: white;
       border-radius: 1rem;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
       overflow: hidden;
-      transition: transform 0.3s;
     }
-
-    .card:hover {
-      transform: translateY(-5px);
-    }
-
     .card__img {
       width: 100%;
       height: 180px;
       object-fit: cover;
     }
-
     .card__body {
       padding: 1rem;
     }
-
-    .card__title {
-      color: var(--logo-primary);
-      margin: 0.5rem 0;
-    }
-
-    .card__desc {
-      font-size: 0.9rem;
-      color: #555;
-      margin-bottom: 1rem;
-    }
-
-    .card__actions {
-      display: flex;
-      justify-content: center;
-      gap: 0.5rem;
-    }
-
     .card__btn, .fb-btn {
       background: var(--logo-accent);
       color: white;
@@ -193,308 +80,81 @@
       border-radius: 0.4rem;
       cursor: pointer;
       transition: background 0.3s;
-      font-size: 0.9rem;
     }
-
     .card__btn:hover, .fb-btn:hover {
       background: var(--logo-primary);
     }
-
-    /* ===== CART SECTION ===== */
-    .cart-section {
-      padding: 2rem;
-      background: #e9ecf1;
-      text-align: center;
-    }
-
-    .cart-container {
-      margin-bottom: 1rem;
-      max-width: 600px;
-      margin-inline: auto;
-      background: white;
-      border-radius: 1rem;
-      padding: 1rem;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    }
-
-    .cart-item {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      border-bottom: 1px solid #ddd;
-      padding: 0.5rem 0;
-    }
-
-    .cart-item:last-child {
-      border-bottom: none;
-    }
-
-    .remove-btn {
-      background: var(--logo-accent);
-      color: white;
-      border: none;
-      border-radius: 0.4rem;
-      padding: 0.3rem 0.6rem;
-      cursor: pointer;
-      font-size: 0.9rem;
-    }
-
-    .remove-btn:hover {
-      background: var(--logo-primary);
-    }
-
-    .cart-total {
-      font-weight: bold;
-      margin-top: 1rem;
-      color: var(--logo-primary);
-    }
-
-    .upload__btn {
-      background: var(--logo-primary);
-      color: white;
-      border: none;
-      padding: 0.8rem 1.5rem;
-      border-radius: 0.5rem;
-      cursor: pointer;
-      transition: background 0.3s;
-    }
-
-    .upload__btn:hover {
-      background: var(--logo-accent);
-    }
-
-    /* ===== PROFILE MODAL ===== */
-    .profile-modal {
-      display: none;
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0, 0, 0, 0.5);
-      justify-content: center;
-      align-items: center;
-      z-index: 1000;
-    }
-
-    .profile-content {
-      background: white;
-      padding: 2rem;
-      border-radius: 1rem;
-      text-align: center;
-      max-width: 400px;
-      width: 90%;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-    }
-
-    .profile-content h2 {
-      color: var(--logo-primary);
-      margin-bottom: 1rem;
-    }
-
-    .profile-content p {
-      margin: 0.5rem 0;
-      color: #444;
-    }
-
-    .close-profile {
-      margin-top: 1rem;
-      background: var(--logo-accent);
-      color: white;
-      border: none;
-      padding: 0.6rem 1.2rem;
-      border-radius: 0.5rem;
-      cursor: pointer;
-    }
-
-    .close-profile:hover {
-      background: var(--logo-primary);
-    }
-
-    /* ===== FOOTER ===== */
     .footer {
-      text-align: center;
-      padding: 1rem;
       background: var(--logo-primary);
       color: white;
-      font-size: 0.9rem;
+      text-align: center;
+      padding: 1rem;
     }
   </style>
 </head>
 <body>
-  <!-- Navbar -->
   <nav class="navbar">
-    <h1 class="navbar__logo">U-Belt Grabs</h1>
+    <h1>U-Belt Grabs</h1>
     <ul class="navbar__menu">
-      <li><a href="#menu-hero" class="navbar__links">Home</a></li>
+      <li><a href="#" class="navbar__links" id="homeBtn">Home</a></li>
       <li><a href="#menu" class="navbar__links">Menu</a></li>
-      <li><a href="#cart" class="navbar__links">Cart</a></li>
-      <li class="profile-dropdown">
-        <button class="profile-btn" id="profileBtn">Profile</button>
-        <div class="dropdown-content" id="dropdownMenu">
-          <a href="#" id="viewProfile">View Profile</a>
-          <a href="#" id="logoutBtn">Logout</a>
-        </div>
-      </li>
+      <li class="navbar__btn"><a href="index.html" id="logoutBtn">Log Out</a></li>
     </ul>
   </nav>
 
-  <!-- Hero Section -->
   <section id="menu-hero" class="menu-hero">
-    <h2 class="hero__title">Explore Delicious Meals</h2>
-    <p class="hero__subtitle">Order from your favorite campus sellers!</p>
+    <h2>Welcome, Customer!</h2>
+    <p>Explore and order from your favorite campus sellers.</p>
   </section>
 
-  <!-- Menu Section -->
   <section id="menu" class="menu-section">
-    <h2 class="section__title">Available Food</h2>
-    <div class="grid">
-      <div class="card">
-        <img src="images/sample-food1.jpg" alt="Adobo Rice" class="card__img" />
-        <div class="card__body">
-          <h3 class="card__title">Adobo Rice</h3>
-          <p class="card__desc">Classic Filipino comfort food — ₱75</p>
-          <div class="card__actions">
-            <button class="card__btn" data-name="Adobo Rice" data-price="75">Add to Cart</button>
-            <a href="https://facebook.com/" target="_blank" class="fb-btn">Facebook</a>
-          </div>
-        </div>
-      </div>
-
-      <div class="card">
-        <img src="images/sample-food2.jpg" alt="Pork Sisig" class="card__img" />
-        <div class="card__body">
-          <h3 class="card__title">Pork Sisig</h3>
-          <p class="card__desc">Crunchy, savory, and spicy — ₱90</p>
-          <div class="card__actions">
-            <button class="card__btn" data-name="Pork Sisig" data-price="90">Add to Cart</button>
-            <a href="https://facebook.com/" target="_blank" class="fb-btn">Facebook</a>
-          </div>
-        </div>
-      </div>
-    </div>
+    <h2 style="text-align:center;color:#142a52;">Available Food</h2>
+    <div class="grid" id="menuGrid"></div>
   </section>
 
-  <!-- Cart Section -->
-  <section id="cart" class="cart-section">
-    <h2 class="section__title">Your Cart</h2>
-    <div class="cart-container" id="cartContainer">
-      <p class="no-items">Your cart is empty.</p>
-    </div>
-    <p class="cart-total" id="cartTotal"></p>
-    <button class="upload__btn" id="checkoutBtn">Checkout</button>
-  </section>
-
-  <!-- Profile Modal -->
-<!-- ===== PROFILE MODAL ===== -->
-<div id="profileModal" class="modal">
-  <div class="modal-content">
-    <h2>Your Profile</h2>
-    <p><strong>Name:</strong> <span id="profileName"></span></p>
-    <p><strong>Email:</strong> <span id="profileEmail"></span></p>
-    <p><strong>Phone:</strong> <span id="profilePhone"></span></p>
-    <button class="close" id="closeProfile">Close</button>
-  </div>
-</div>
-
-
-  <!-- Footer -->
   <footer class="footer">
     <p>© 2025 U-Belt Grabs. All rights reserved.</p>
   </footer>
 
   <script>
-    // ===== PROFILE DROPDOWN =====
-    const profileBtn = document.getElementById("profileBtn");
-    const dropdownMenu = document.getElementById("dropdownMenu");
+    const menuGrid = document.getElementById("menuGrid");
+    const homeBtn = document.getElementById("homeBtn");
+    const logoutBtn = document.getElementById("logoutBtn");
+    const items = JSON.parse(localStorage.getItem("sellerItems")) || [];
 
-    profileBtn.addEventListener("click", (event) => {
-      event.stopPropagation();
-      dropdownMenu.classList.toggle("show");
-    });
-
-    window.addEventListener("click", (event) => {
-      if (!dropdownMenu.contains(event.target) && !profileBtn.contains(event.target)) {
-        dropdownMenu.classList.remove("show");
+    function renderMenu() {
+      menuGrid.innerHTML = "";
+      if (items.length === 0) {
+        menuGrid.innerHTML = "<p style='text-align:center;'>No items available yet.</p>";
+        return;
       }
+      items.forEach((item) => {
+        const card = document.createElement("div");
+        card.classList.add("card");
+        card.innerHTML = `
+          <img src="${item.img}" class="card__img">
+          <div class="card__body">
+            <h3>${item.name}</h3>
+            <p>${item.desc} — ₱${item.price}</p>
+            <a href="${item.fb}" target="_blank" class="fb-btn">Facebook</a>
+          </div>
+        `;
+        menuGrid.appendChild(card);
+      });
+    }
+
+    homeBtn.addEventListener("click", e => {
+      e.preventDefault();
+      document.querySelector("#menu-hero").scrollIntoView({ behavior: "smooth" });
     });
 
-    // ===== LOGOUT =====
-    document.getElementById("logoutBtn").addEventListener("click", (e) => {
+    logoutBtn.addEventListener("click", e => {
       e.preventDefault();
       alert("You have been logged out!");
       window.location.href = "index.html";
     });
 
-    // ===== VIEW PROFILE =====
-    const profileModal = document.getElementById("profileModal");
-    document.getElementById("viewProfile").addEventListener("click", (e) => {
-      e.preventDefault();
-      dropdownMenu.classList.remove("show");
-      profileModal.style.display = "flex";
-    });
-
-    document.getElementById("closeProfile").addEventListener("click", () => {
-      profileModal.style.display = "none";
-    });
-
-    window.addEventListener("click", (e) => {
-      if (e.target === profileModal) profileModal.style.display = "none";
-    });
-
-    // ===== CART FUNCTIONALITY =====
-    const cartContainer = document.getElementById("cartContainer");
-    const cartTotal = document.getElementById("cartTotal");
-    let cart = [];
-
-    document.querySelectorAll(".card__btn").forEach((btn) => {
-      btn.addEventListener("click", () => {
-        const name = btn.getAttribute("data-name");
-        const price = parseFloat(btn.getAttribute("data-price"));
-        cart.push({ name, price });
-        updateCart();
-      });
-    });
-
-    function updateCart() {
-      cartContainer.innerHTML = "";
-      if (cart.length === 0) {
-        cartContainer.innerHTML = "<p class='no-items'>Your cart is empty.</p>";
-        cartTotal.textContent = "";
-        return;
-      }
-
-      let total = 0;
-      cart.forEach((item, index) => {
-        total += item.price;
-        const div = document.createElement("div");
-        div.classList.add("cart-item");
-        div.innerHTML = `
-          <span>${item.name} — ₱${item.price}</span>
-          <button class="remove-btn" data-index="${index}">Remove</button>
-        `;
-        cartContainer.appendChild(div);
-      });
-
-      cartTotal.textContent = `Total: ₱${total}`;
-      document.querySelectorAll(".remove-btn").forEach((btn) => {
-        btn.addEventListener("click", () => {
-          const i = btn.getAttribute("data-index");
-          cart.splice(i, 1);
-          updateCart();
-        });
-      });
-    }
-
-    document.getElementById("checkoutBtn").addEventListener("click", () => {
-      if (cart.length === 0) {
-        alert("Your cart is empty!");
-      } else {
-        alert("Checkout successful! Thank you for your order.");
-        cart = [];
-        updateCart();
-      }
-    });
+    renderMenu();
   </script>
 </body>
 </html>
