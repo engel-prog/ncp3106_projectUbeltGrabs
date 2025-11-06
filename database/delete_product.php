@@ -1,5 +1,5 @@
 <?php
-include "db.php";
+include "database/db.php";
 
 // Check if product ID is provided
 if (!isset($_GET['id']) || empty($_GET['id'])) {
